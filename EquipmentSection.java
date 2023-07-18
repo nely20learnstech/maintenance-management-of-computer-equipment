@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
-// import javax.swing.table.DefaultTableModel;
-// import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -69,10 +67,8 @@ public class EquipmentSection extends JPanel implements ActionListener{
 
     EquipmentSection()
     {
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.setLayout(new FlowLayout());
-//        this.setLayout(null);
 
         this.setVisible(true);
 
@@ -81,14 +77,8 @@ public class EquipmentSection extends JPanel implements ActionListener{
         inDamagedState = new JLabel();
         inDestroyedState = new JLabel();
 
-//        inGoodState.setBounds(500, 650, 150, 30);
-//        inDamagedState.setBounds(600, 650, 150, 30);
-//        inDestroyedState.setBounds(700, 650, 150, 30);
-
         JPanel equipmentStatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         equipmentStatePanel.setBounds(15, 470, 430, 40);
-//        equipmentStatePanel.setBackground(Color.decode("#e1c1a4"));
-
 
         equipmentStatePanel.add(inGoodState);
         equipmentStatePanel.add(inDamagedState);
@@ -109,9 +99,7 @@ public class EquipmentSection extends JPanel implements ActionListener{
 
         // Table Section
         JPanel tablePanel = new JPanel();
-//        tablePanel.setBackground(Color.BLUE);
         tablePanel.setBounds(580, 200, 600, 600);
-        //tablePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         equipmentTable = new JTable();
 
@@ -121,15 +109,11 @@ public class EquipmentSection extends JPanel implements ActionListener{
 
         // Center Text Renderer
         equipmentTable.setDefaultRenderer(Object.class, new CenterTextRenderer());
-        // equipmentTable.setBounds(0, 0, 800, 500);
-        // tablePanel.setBackground(Color.GREEN);
-        // equipmentTable.setLayout(new FlowLayout(FlowLayout.CENTER));
+        
         // Add the table to a scroll pane
         JScrollPane scrollPane = new JScrollPane(equipmentTable);
         scrollPane.setPreferredSize(new Dimension(600, 500));
         tablePanel.add(scrollPane);
-
-
 
         // Show state
         showStateCounts();
@@ -174,7 +158,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
 
         // Form Section
         JPanel crudSection = new JPanel();
-//        crudSection.setBackground(Color.GRAY);
         crudSection.setBounds(10, 150, 500, 300);
         crudSection.setLayout(null);
 
@@ -187,7 +170,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
         equipmentNumberTextField = new JTextField();
         equipmentNumberTextField.setFont(new Font("Times New Roman", Font.PLAIN,16));
         equipmentNumberTextField.setBounds(175, 5, 200, 30);
-        // equipmentNumberTextField.setEditable(false);
         crudSection.add(equipmentNumberTextField);
 
 
@@ -229,7 +211,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
         crudSection.add(stateComboBox);
 
         // Buttons
-
         insertButton = new JButton("Ajouter");
         insertButton.setBounds(5, 265, 100, 30);
 
@@ -270,12 +251,9 @@ public class EquipmentSection extends JPanel implements ActionListener{
         this.add(tablePanel);
         this.add(crudSection);
         this.setSize(1200, 800);
-        // this.setLayout(new FlowLayout());
         this.setLayout(null);
         this.setMinimumSize(new Dimension(1100, 800));
         this.setVisible(true);
-
-//        this.pack();
 
         // Create the switch table JComboBox with options
         switchTableBox = new JComboBox<>();
@@ -325,14 +303,11 @@ public class EquipmentSection extends JPanel implements ActionListener{
                 if(equipment.isEmpty()){
                     String errorMessage = "*Veuillez saisir un numéro pour votre matériel.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
-
                 }
 
                 if (descriptionTextField.getText().trim().isEmpty()) {
                     String errorMessage = "*Veuillez saisir une description pour votre matériel.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
-
-
 
                 }
 
@@ -340,8 +315,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
                 if (characteriticsTextArea.getText().trim().isEmpty()) {
                     String errorMessage = "*Veuillez saisir des caractéristiques pour votre matériel.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
-
-
                 }
 
             }
@@ -351,16 +324,12 @@ public class EquipmentSection extends JPanel implements ActionListener{
                 try{
                     String sql = "INSERT INTO equipment (equipment_number, designation, characteristic, current_state) VALUES (?,?,?,?)";
                     connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-//                    Statement stat = connection.createStatement();
                     preparedStatement = connection.prepareStatement(sql);
                     preparedStatement.setString(1,equipmentNumberTextField.getText().trim());
                     preparedStatement.setString(2,descriptionTextField.getText().trim());
                     preparedStatement.setString(3,characteriticsTextArea.getText().trim());
                     preparedStatement.setString(4,stateComboBox.getSelectedItem().toString().trim());
                     preparedStatement.executeUpdate();
-
-
-//                JOptionPane.showMessageDialog(null, "Inserted successfully");
                 }
                 catch (SQLException exception){
 
@@ -369,11 +338,8 @@ public class EquipmentSection extends JPanel implements ActionListener{
                         // Extract the necessary information to create a readable error message
                         String constraintName = exception.getMessage(); // Constraint name, e.g., "PRIMARY"
                         String columnName = ""; // Column name, e.g., "id"
-                        // You can extract the column name from the SQLException message or retrieve it from the table metadata
 
                         // Create a readable error message
-//                    String errorMessage = "Primary key constraint violation: Duplicate value for column " + columnName;
-
                         String errorMessage = "Ce numéro appartient déjà à un équipment. \n Veuillez saisir un autre numéro.";
                         JOptionPane.showMessageDialog(null, errorMessage, "Duplication de numéro", JOptionPane.WARNING_MESSAGE);
                         // Display the error message to the user (e.g., show a dialog box or set the text of a label)
@@ -397,8 +363,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
                 if(equipmentNumberTextField.getText().trim().isEmpty()){
                     String errorMessage = "Veuillez saisir un numéro pour votre matériel.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
-
-
                 }
                 else {
                     int choice = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer?",
@@ -411,7 +375,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
                     }
                     showTableData();
                     showStateCounts();
-//                    fetchUpdatedStateData();
                 }
 
             }
@@ -432,7 +395,6 @@ public class EquipmentSection extends JPanel implements ActionListener{
                         JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
                     }
 
-
                     if (characteriticsTextArea.getText().trim().isEmpty()) {
                         String errorMessage = "*Veuillez saisir des caractéristiques pour votre matériel.";
                         JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
@@ -445,7 +407,7 @@ public class EquipmentSection extends JPanel implements ActionListener{
 
                     // Handle the user's response
                     if (choice == JOptionPane.YES_OPTION) {
-                        // User clicked "Yes" - proceed with deletion
+                        // User clicked "Yes" - proceed with edition
                         updateRecord();
                     }
                     showTableData();
