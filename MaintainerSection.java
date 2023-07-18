@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
-// import java.awt.BorderLayout;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -31,8 +30,8 @@ public class MaintainerSection extends JPanel{
     ResultSet resultSet = null;
 
     final String DB_URL = "jdbc:mysql://localhost/maintenance_management?serverTimezone=UTC";
-    final String USERNAME = "root";
-    final String PASSWORD = "";
+    final String USERNAME = "your_username";
+    final String PASSWORD = "your_password";
 
     // Search TextField
     private JTextField searchTextField;
@@ -45,15 +44,8 @@ public class MaintainerSection extends JPanel{
 
     MaintainerSection()
     {
-
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
-        // this.setLayout(new FlowLayout());
-
-
         this.setVisible(true);
-
-        // JDateChooser datechooser= new JDateChooser();
 
         JLabel maintainerSectionLabel = new JLabel();
         maintainerSectionLabel.setText("Intervenants");
@@ -64,9 +56,6 @@ public class MaintainerSection extends JPanel{
         maintainerSectionLabel.setBounds(10,0,900,100);
         maintainerSectionLabel.setForeground(Color.decode("#002456"));
         maintainerSectionLabel.setFont(new Font("Times New Roman", Font.PLAIN,70));
-
-
-
 
         // Search Field
         searchTextField = new JTextField();
@@ -98,15 +87,11 @@ public class MaintainerSection extends JPanel{
 
         // Table Section
         JPanel tablePanel = new JPanel();
-//        tablePanel.setBackground(Color.BLUE);
         tablePanel.setBounds(560, 150, 700, 530);
 
 
         tablePanel.setLayout(new BorderLayout(0, 20));
         JLabel searchLabel = new JLabel("Rechercher ici : ");
-
-//        searchTextField.setFont(new Font("Times New Roman", Font.PLAIN,16));
-//        searchTextField.setBounds(610, 120, 230, 30);
 
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         searchTextField.setPreferredSize(new Dimension(230, 30));
@@ -156,21 +141,17 @@ public class MaintainerSection extends JPanel{
 
         // Add table to scroll pane
         JScrollPane scrollPane = new JScrollPane(maintainerTable);
-//        maintainerTable.setSize(700, 490);
         scrollPane.setSize(700, 500);
         JLabel tableTitle = new JLabel("Liste des intervenants");
         tableTitle.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 20));
         tablePanel.add(tableTitle, BorderLayout.NORTH);
         tablePanel.add(searchPanel,BorderLayout.BEFORE_LINE_BEGINS);
         tablePanel.add(scrollPane, BorderLayout.SOUTH);
-//        tablePanel.add(tableTitle);
-//        tablePanel.add(scrollPane);
 
         showTableData();
 
         // Form Section
         JPanel crudSection = new JPanel();
-//        crudSection.setBackground(Color.GRAY);
         crudSection.setBounds(10, 150, 450, 500);
         crudSection.setLayout(null);
 
@@ -513,24 +494,6 @@ public class MaintainerSection extends JPanel{
     public void showTableData(){
 
         // Create a custom header renderer
-//        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
-//            @Override
-//            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-//                Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//                component.setBackground(Color.YELLOW); // Set the desired background color
-//                component.setForeground(Color.DARK_GRAY);
-//                component.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-////                component.setHorizontalAlignment(SwingConstants.CENTER);
-//
-//                // Apply the custom renderer to each column in the table
-////                for (int columnIndex = 0; columnIndex < maintainerTable.getColumnCount(); columnIndex++) {
-////                    maintainerTable.getColumnModel().getColumn(columnIndex).setCellRenderer(renderer);
-////                }
-//
-//                return component;
-//            }
-//        };
-
         maintainerTable.getTableHeader().setBackground(Color.decode("#c9e4fe"));
         maintainerTable.getTableHeader().setForeground(Color.decode("#002456"));
         maintainerTable.getTableHeader().setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 16));
@@ -539,10 +502,6 @@ public class MaintainerSection extends JPanel{
         // Default table cell renderer
         renderer =  new DefaultTableCellRenderer();
         renderer.setFont(new Font("Times New Roman", Font.BOLD, 16)); // Set the desired font size
-
-        // Set the custom header renderer to the table
-//        maintainerTable.getTableHeader().setDefaultRenderer(headerRenderer);
-//        maintainerTable.getColumnModel().getColumnIndex(renderer);
 
         maintainerTable.setRowHeight(40);
         // Disable cell editing
