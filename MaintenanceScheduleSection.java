@@ -3,7 +3,6 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
-// import java.awt.BorderLayout;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,8 +34,8 @@ public class MaintenanceScheduleSection extends JPanel{
     ResultSet resultSet = null;
 
     final String DB_URL = "jdbc:mysql://localhost/maintenance_management?serverTimezone=UTC";
-    final String USERNAME = "root";
-    final String PASSWORD = "/*roasted*/9-K";
+    final String USERNAME = "your_username";
+    final String PASSWORD = "your_password";
 
     // JDateChooser
     JDateChooser dateChooser;
@@ -132,7 +131,6 @@ public class MaintenanceScheduleSection extends JPanel{
 
         // Form Section
         JPanel crudSection = new JPanel();
-//        crudSection.setBackground(Color.GRAY);
         crudSection.setBounds(10, 150, 500, 500);
         crudSection.setLayout(null);
 
@@ -215,12 +213,9 @@ public class MaintenanceScheduleSection extends JPanel{
         this.add(tablePanel);
         this.add(crudSection);
         this.setSize(1200, 800);
-//        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         this.setLayout(null);
         this.setMinimumSize(new Dimension(1100, 800));
         this.setVisible(true);
-
-//        this.pack();
 
 
         // buttons perform actions
@@ -236,7 +231,6 @@ public class MaintenanceScheduleSection extends JPanel{
                 if (equipmentNumberTextField.getText().trim().isEmpty()) {
                     String errorMessage = "Veuillez saisir un numéro pour votre matériel.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
-
 
                 }
 
@@ -299,8 +293,6 @@ public class MaintenanceScheduleSection extends JPanel{
                 if(maintainerNumberTextField.getText().trim().isEmpty()){
                     String errorMessage = "Veuillez saisir le numéro de votre intervenant.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
-
-
                 }
                 else {
                     int choice = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer?",
@@ -338,7 +330,6 @@ public class MaintenanceScheduleSection extends JPanel{
                     }
 
 
-
                     if (durationTextField.getText().trim().isEmpty()) {
                         String errorMessage = "Veuillez saisir la durée l'entretien.";
                         JOptionPane.showMessageDialog(null, errorMessage, "Champ vide", JOptionPane.ERROR_MESSAGE);
@@ -352,7 +343,7 @@ public class MaintenanceScheduleSection extends JPanel{
 
                     // Handle the user's response
                     if (choice == JOptionPane.YES_OPTION) {
-                        // User clicked "Yes" - proceed with deletion
+                        // User clicked "Yes" - proceed with edition
                         updateRecord();
                     }
 
@@ -388,10 +379,7 @@ public class MaintenanceScheduleSection extends JPanel{
         try{
             String sql = "UPDATE maintenance3 SET intervention_date=? , duration=?, maintainer_number=?, equipment_number=? WHERE maintainer_number=? AND equipment_number=?";
             connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-//                    Statement stat = connection.createStatement();
             preparedStatement = connection.prepareStatement(sql);
-            //preparedStatement.setString(1, maintainerNumberTextField.getText().trim());
-            //preparedStatement.setString(2,equipmentNumberTextField.getText().trim());
             java.util.Date selectedDate = dateChooser.getDate();
             // Convert java.util.Date to java.sql.Date
             java.sql.Date interventionDate = new java.sql.Date(selectedDate.getTime());
