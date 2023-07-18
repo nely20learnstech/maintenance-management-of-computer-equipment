@@ -44,7 +44,6 @@ public class CardLayoutExample {
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setLayout(new BoxLayout(menuBar, BoxLayout.Y_AXIS));
-//        JMenu menu = new JMenu("Switch Panel");
 
         JMenuItem menuItem = new JMenuItem("Gestion des entretiens");
         JMenuItem menuItem1 = new JMenuItem("  Matériels");
@@ -83,7 +82,6 @@ public class CardLayoutExample {
         menuItem4.setPreferredSize(new Dimension(0, 40));
         menuItem5.setPreferredSize(new Dimension(0, 40));
         menuItem.setPreferredSize(new Dimension(228, 50));
-//        menuItem1.setSize(100, 80);
 
         // Create separators
         JSeparator separator = new JSeparator();
@@ -99,7 +97,7 @@ public class CardLayoutExample {
         menuItem3.addActionListener(e -> cardLayout.show(cardPanel, "panel3"));
         menuItem4.addActionListener(e -> cardLayout.show(cardPanel, "panel4"));
         menuItem5.addActionListener(e -> cardLayout.show(cardPanel, "panel5"));
-//
+
         menuBar.add(menuItem);
         menuBar.add(separator);
         menuBar.add(menuItem1);
@@ -120,7 +118,6 @@ public class CardLayoutExample {
         // Set the layout for the frame
         frame.setLayout(new BorderLayout());
 
-//        menuBar.add(menu);
         frame.add(sideMenuPanel, BorderLayout.WEST);
 
         // Add the main panel to the center
